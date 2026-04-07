@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+coverage/
+
+# Dependencies
+uploads/
+
+# Compiled output
+dist/
+
+# Environment variables
+#.env
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+
+# IDE specific
+.vscode/
+.idea/

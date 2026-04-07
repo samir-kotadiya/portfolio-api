@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "c8451823-0b63-4e09-a178-5f8ede74f614",
+		"name": "portfolio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12480358",
+		"_collection_link": "https://mine-per-postman.postman.co/workspace/mi~d9dfbd57-8166-4453-a62d-d8ba6303cda4/collection/12480358-c8451823-0b63-4e09-a178-5f8ede74f614?action=share&source=collection_link&creator=12480358"
+	},
+	"item": [
+		{
+			"name": "order split",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderType\": \"BUY\",\n    \"totalAmount\": 100,\n    \"portfolio\": [\n        {\n            \"symbol\": \"AAPL\",\n            \"weight\": 33.3333333,\n            \"price\": 300\n        },\n        {\n            \"symbol\": \"TSLA\",\n            \"weight\": 33.3333333\n        },\n        {\n            \"symbol\": \"GOOG\",\n            \"weight\": 33.3333334\n            // Precisely 100\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/v1/orders/split"
+			},
+			"response": [
+				{
+					"name": "order split - sucess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderType\": \"BUY\",\n    \"totalAmount\": 100,\n    \"portfolio\": [\n        {\n            \"symbol\": \"AAPL\",\n            \"weight\": 33.3333333,\n            \"price\": 300\n        },\n        {\n            \"symbol\": \"TSLA\",\n            \"weight\": 33.3333333\n        },\n        {\n            \"symbol\": \"GOOG\",\n            \"weight\": 33.3333334\n            // Precisely 100\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/orders/split"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "701"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2bd-HWYMcz5hmA+CikGUIV6nMMU2CbE\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Apr 2026 10:02:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"executionTime\": \"2026-04-08 09:30:00\",\n        \"orders\": [\n            {\n                \"id\": \"e150aaf4-2b05-4727-841c-67a2d1154814\",\n                \"symbol\": \"AAPL\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.111,\n                \"price\": 300,\n                \"executionTime\": \"2026-04-08T04:00:00.053Z\",\n                \"createdAt\": \"2026-04-07T10:02:41.000Z\"\n            },\n            {\n                \"id\": \"260e5c9e-9ca1-45d8-8d92-8b565dee7400\",\n                \"symbol\": \"TSLA\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-08T04:00:00.053Z\",\n                \"createdAt\": \"2026-04-07T10:02:41.000Z\"\n            },\n            {\n                \"id\": \"e6b28470-c100-4369-88bb-be017e1ac204\",\n                \"symbol\": \"GOOG\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333334,\n                \"shares\": 0.333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-08T04:00:00.053Z\",\n                \"createdAt\": \"2026-04-07T10:02:41.000Z\"\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "order split - validation error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderType\": \"BUYe\",\n    \"totalAmount\": 100,\n    \"portfolio\": [\n        {\n            \"symbol\": \"AAPL\",\n            \"weight\": 60\n        },\n        {\n            \"symbol\": \"TSLA\",\n            \"weight\": 40\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/orders/split"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "141"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8d-Wz92sgqLKOIIkN+nVytuoHBRxxU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Apr 2026 12:52:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Validation failed\",\n    \"errors\": [\n        {\n            \"field\": \"orderType\",\n            \"errors\": [\n                \"orderType must be one of the following values: \"\n            ]\n        }\n    ]\n}"
+				},
+				{
+					"name": "order split - validation error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderType\": \"BUY\",\n    \"totalAmount\": 100,\n    \"portfolio\": [\n        {\n            \"symbol\": \"AAPL\",\n            \"weight\": 60\n        },\n        {\n            \"symbol\": \"TSLA\",\n            \"weight\": 60\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/orders/split"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4b-3Nh1OKBEGRU99t9IjXAn8MT57Po\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Apr 2026 13:06:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Portfolio weights must sum to 100\",\n    \"errors\": []\n}"
+				},
+				{
+					"name": "order split - 4  decimal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderType\": \"BUY\",\n    \"totalAmount\": 100,\n    \"portfolio\": [\n            { \"symbol\": \"AAPL\", \"weight\": 33.3333333 }, \n            { \"symbol\": \"TSLA\", \"weight\": 33.3333333 },\n            { \"symbol\": \"GOOG\", \"weight\": 33.3333334 } // Precisely 100\n        ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/orders/split"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "712"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2c8-Y+YDt+07bGwPIMdsfCSDisEs8cE\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Apr 2026 06:36:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"executionTime\": \"2026-04-07T06:36:46.794Z\",\n        \"orders\": [\n            {\n                \"id\": \"c221f23d-5fc1-4c24-86e6-c825ceba5bc3\",\n                \"symbol\": \"AAPL\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.33333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T06:36:46.794Z\",\n                \"createdAt\": \"2026-04-07T06:36:46.000Z\"\n            },\n            {\n                \"id\": \"f517a677-1a57-4170-8816-cc0d32174d62\",\n                \"symbol\": \"TSLA\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.33333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T06:36:46.794Z\",\n                \"createdAt\": \"2026-04-07T06:36:46.000Z\"\n            },\n            {\n                \"id\": \"dd6232bb-0426-4f6e-9b36-92b0a4dcd643\",\n                \"symbol\": \"GOOG\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333334,\n                \"shares\": 0.33333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T06:36:46.794Z\",\n                \"createdAt\": \"2026-04-07T06:36:46.000Z\"\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "order split with price",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderType\": \"BUY\",\n    \"totalAmount\": 100,\n    \"portfolio\": [\n        {\n            \"symbol\": \"AAPL\",\n            \"weight\": 33.3333333,\n            \"price\": 300\n        },\n        {\n            \"symbol\": \"TSLA\",\n            \"weight\": 33.3333333\n        },\n        {\n            \"symbol\": \"GOOG\",\n            \"weight\": 33.3333334\n            // Precisely 100\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/orders/split"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "706"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2c2-kUKXtDSClwWJ5LRoxg3Qzh0Sarw\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Apr 2026 09:13:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"executionTime\": \"2026-04-07T09:13:19.926Z\",\n        \"orders\": [\n            {\n                \"id\": \"3a0f5c0d-8ddf-4a2d-97fa-66ba35065fb9\",\n                \"symbol\": \"AAPL\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.111,\n                \"price\": 300,\n                \"executionTime\": \"2026-04-07T09:13:19.926Z\",\n                \"createdAt\": \"2026-04-07T09:13:19.000Z\"\n            },\n            {\n                \"id\": \"9c95bb90-7272-4a3e-a7cf-9a6f21c43131\",\n                \"symbol\": \"TSLA\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T09:13:19.926Z\",\n                \"createdAt\": \"2026-04-07T09:13:19.000Z\"\n            },\n            {\n                \"id\": \"c657df35-dc5a-40f4-9bc5-742a11489aa5\",\n                \"symbol\": \"GOOG\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333334,\n                \"shares\": 0.333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T09:13:19.926Z\",\n                \"createdAt\": \"2026-04-07T09:13:19.000Z\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"41224\",\n    \"newPassword\": \"pzzzzz1\",\n    \"confirmPassword\": \"pzzzzz1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/orders/?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get orders",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"41224\",\n    \"newPassword\": \"pzzzzz1\",\n    \"confirmPassword\": \"pzzzzz1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/orders/?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "715"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2cb-vkqwyy0W33iEz+O5ftj1/XlAw0Q\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Apr 2026 09:12:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": \"2b738670-c8e0-440a-9b2d-9696e697d433\",\n                \"symbol\": \"AAPL\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T08:38:11.081Z\",\n                \"createdAt\": \"2026-04-07T08:38:11.000Z\"\n            },\n            {\n                \"id\": \"96f5f8e4-29fc-40e1-a349-a1740b569494\",\n                \"symbol\": \"TSLA\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333333,\n                \"shares\": 0.333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T08:38:11.081Z\",\n                \"createdAt\": \"2026-04-07T08:38:11.000Z\"\n            },\n            {\n                \"id\": \"4d434433-8c14-4e48-bf05-244fa6f044e4\",\n                \"symbol\": \"GOOG\",\n                \"orderType\": \"BUY\",\n                \"amount\": 33.3333334,\n                \"shares\": 0.333,\n                \"price\": 100,\n                \"executionTime\": \"2026-04-07T08:38:11.081Z\",\n                \"createdAt\": \"2026-04-07T08:38:11.000Z\"\n            }\n        ],\n        \"meta\": {\n            \"page\": 1,\n            \"limit\": 10,\n            \"total\": 3,\n            \"totalPages\": 1\n        }\n    }\n}"
+				}
+			]
+		}
+	]
+}
