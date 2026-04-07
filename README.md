@@ -147,3 +147,13 @@ market timezone can set in `src/config/constants.ts` file
 
 export const MARKET_TIMEZONE = "Asia/Kolkata";
 ```
+
+## not consider in assesemnts
+Authentication / Authorisation
+Swagger documentaion
+Add unit test cases for all use cases and files (due to time constrains only added important / critical test cases)
+Redis caching
+Market price API integration
+Rate limiting
+Observability (Prometheus + Grafana)
+CI/CD pipelines
