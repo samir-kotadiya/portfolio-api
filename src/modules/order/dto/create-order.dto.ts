@@ -25,4 +25,8 @@ export class CreateOrderDTO {
     @ValidateNested({ each: true })
     @Type(() => portfolioDTO)
     portfolio!: portfolioDTO[];
+
+    @IsString()
+    @IsOptional()
+    idempotencyKey?: string;
 }

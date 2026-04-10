@@ -276,6 +276,7 @@ All generated suggestions were reviewed and manually integrated into the impleme
 The final code and architecture decisions were implemented independently.
 
 ## Production Improvements
+
 Authentication / Authorisation
 Swagger documentaion
 Add unit test cases for all use cases and files (due to time constrains only added important / critical test cases)

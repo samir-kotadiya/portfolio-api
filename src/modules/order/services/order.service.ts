@@ -1,10 +1,11 @@
 import { orderRepository } from "../repositories/order.repository.js";
 import { DEFAULT_STOCK_PRICE } from "../../../config/constants.js";
-import { roundShares } from "../../../shared/utils/round.util.js";
+import { generateIdempotencyKey, roundShares } from "../../../shared/utils/round.util.js";
 import { getExecutionTime } from "../../../shared/utils/market-time.util.js";
 import { Order } from "../entities/order.entity.js";
 import { BaseService } from "../../../core/services/base.service.js";
 import type { CreateOrderDTO, portfolioDTO } from "../dto/create-order.dto.js";
+import cacheService from "../../../shared/services/cache.service.js";
 import config from "../../../config/config.js";
 
 export class OrderService extends BaseService {
@@ -39,6 +40,14 @@ export class OrderService extends BaseService {
     async splitOrder(input: CreateOrderDTO) {
 
         const { totalAmount, portfolio, orderType } = input;
+        let idempotencyKey = input?.idempotencyKey ?? generateIdempotencyKey(input);
+        console.log(idempotencyKey)
+
+        // Idempotency check: Return cached result if this request was already processed
+        if (idempotencyKey) {
+            const cachedResponse = cacheService.get(idempotencyKey);
+            if (cachedResponse) return cachedResponse;
+        }
 
         // validate portfolio rules
         this.validatePortfolio(portfolio);
@@ -69,10 +78,17 @@ export class OrderService extends BaseService {
             results.push(order);
         }
 
-        return {
+        const response = {
             executionTime,
             orders: results
         };
+
+        if (idempotencyKey) {
+            // Cache the successful response for 1 hour (3600 seconds)
+            cacheService.set(idempotencyKey, response, 3600);
+        }
+
+        return response;
     }
 
     async getOrders(page: number, limit: number) {
