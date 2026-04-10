@@ -21,16 +21,16 @@
       "jest",
       "node"
     ],
-    "esModuleInterop": true,
-    "allowJs": true,
+    //"esModuleInterop": true,
+    //"allowJs": true,
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
     // and npm install -D @types/node
     // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    "sourceMap": false,
+    "declaration": false,
+    "declarationMap": false,
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
@@ -43,12 +43,12 @@
     // "noPropertyAccessFromIndexSignature": true,
     // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
+    //"jsx": "react-jsx",
+    "verbatimModuleSyntax": true,  // remove type define with import
+    "isolatedModules": true, // ensures every TypeScript file is treated as a standalone module (isolated)
+    // "noUncheckedSideEffectImports": true, // used to ensure that side-effect imports (like importing a CSS file or a polyfill) actually point to a file that exists
+    "moduleDetection": "force", // forces TypeScript to treat every non-declaration (.ts, .tsx) file as an ECMAScript module, regardless of whether it contains top-level import or export statements
+    "skipLibCheck": true, // instructs the compiler to skip type checking of all declaration files (.d.ts) // Ignore Third-Party Errors, Performance Boost
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }

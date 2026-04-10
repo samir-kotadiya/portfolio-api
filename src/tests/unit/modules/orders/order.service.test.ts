@@ -33,6 +33,8 @@ describe("Order Service", () => {
       });
 
       expect(result.orders.length).toBe(2);
+      expect(result.orders[0].amount).toBe(60)
+      //expect(result.orders[0].shares).toBe(0.6);
     });
 
     it("should throw error when weight sum is exceeded 100%", async () => {

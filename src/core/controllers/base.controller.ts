@@ -4,7 +4,7 @@ import { validate } from "class-validator";
 
 export abstract class BaseController {
 
-    protected async validateDTO<T>(dtoClass: new () => T, payload: unknown): Promise<T> {
+    protected async validateDTO<T, P>(dtoClass: new () => T, payload: P): Promise<T> {
 
         const dtoObject = plainToInstance(dtoClass, payload);
 
@@ -12,7 +12,7 @@ export abstract class BaseController {
             whitelist: true,
             forbidNonWhitelisted: true,
         });
-        
+
         if (errors.length > 0) {
 
             const formattedErrors = errors.map(err => ({
